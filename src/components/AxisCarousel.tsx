@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react"
+import { useState, useCallback } from "react"
 import { AxisSlider } from "./AxisSlider"
 import { axisKeys } from "../data/axes"
 import { useT } from "../i18n/translations"
@@ -6,51 +6,29 @@ import { useT } from "../i18n/translations"
 interface AxisCarouselProps {
   ratings: Record<string, number>
   onRatingChange: (key: string, value: number) => void
+  onComplete: () => void
+  completeLabel: string
 }
 
-export function AxisCarousel({ ratings, onRatingChange }: AxisCarouselProps) {
+export function AxisCarousel({ ratings, onRatingChange, onComplete, completeLabel }: AxisCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const t = useT()
-  const touchStartX = useRef(0)
-  const touchEndX = useRef(0)
 
-  const goTo = useCallback(
-    (index: number) => {
-      if (index >= 0 && index < axisKeys.length) {
-        setCurrentIndex(index)
-      }
-    },
-    [],
-  )
+  const isLast = currentIndex === axisKeys.length - 1
 
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-  }, [])
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX
-  }, [])
-
-  const handleTouchEnd = useCallback(() => {
-    const diff = touchStartX.current - touchEndX.current
-    const threshold = 50
-    if (diff > threshold) {
-      setCurrentIndex((prev) => Math.min(prev + 1, axisKeys.length - 1))
-    } else if (diff < -threshold) {
-      setCurrentIndex((prev) => Math.max(prev - 1, 0))
+  const handleNext = useCallback(() => {
+    if (isLast) {
+      onComplete()
+    } else {
+      setCurrentIndex((prev) => prev + 1)
     }
-  }, [])
+  }, [isLast, onComplete])
 
   const currentKey = axisKeys[currentIndex]
   const axisT = t.axes[currentKey]
 
   return (
-    <div
-      className="flex flex-1 flex-col items-center justify-center"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className="flex flex-1 flex-col items-center justify-center">
       <AxisSlider
         axisKey={currentKey}
         label={axisT.label}
@@ -64,40 +42,28 @@ export function AxisCarousel({ ratings, onRatingChange }: AxisCarouselProps) {
       {/* Dot indicators */}
       <div className="mt-6 flex gap-2">
         {axisKeys.map((key, i) => (
-          <button
+          <div
             key={key}
-            type="button"
-            onClick={() => goTo(i)}
             className={`h-2.5 w-2.5 rounded-full border border-primary transition-colors ${
               i === currentIndex ? "bg-primary" : "bg-transparent"
             }`}
-            aria-label={`Go to axis ${i + 1}`}
           />
         ))}
       </div>
 
-      {/* Arrow navigation for desktop */}
-      <div className="mt-4 flex gap-4">
-        <button
-          type="button"
-          onClick={() => goTo(currentIndex - 1)}
-          disabled={currentIndex === 0}
-          className="rounded-full border-2 border-primary bg-surface px-4 py-2 font-body text-sm disabled:opacity-30 active:scale-95 transition-transform"
-        >
-          ←
-        </button>
-        <span className="flex items-center font-body text-sm text-muted">
-          {t.step(currentIndex + 1, axisKeys.length)}
-        </span>
-        <button
-          type="button"
-          onClick={() => goTo(currentIndex + 1)}
-          disabled={currentIndex === axisKeys.length - 1}
-          className="rounded-full border-2 border-primary bg-surface px-4 py-2 font-body text-sm disabled:opacity-30 active:scale-95 transition-transform"
-        >
-          →
-        </button>
-      </div>
+      {/* Step counter */}
+      <span className="mt-3 font-body text-sm text-muted">
+        {t.step(currentIndex + 1, axisKeys.length)}
+      </span>
+
+      {/* Next / Complete button */}
+      <button
+        type="button"
+        onClick={handleNext}
+        className="mt-4 w-full max-w-sm rounded-2xl border-2 border-primary bg-accent px-6 py-4 font-body text-base font-bold text-surface active:scale-[0.98] transition-transform"
+      >
+        {isLast ? completeLabel : t.nextBtn}
+      </button>
     </div>
   )
 }

@@ -55,18 +55,7 @@ function PlayerOneScreen() {
 
       {/* Carousel */}
       <div className="flex flex-1 items-center px-4 py-4">
-        <AxisCarousel ratings={ratings} onRatingChange={handleRatingChange} />
-      </div>
-
-      {/* Sticky bottom CTA */}
-      <div className="sticky bottom-0 border-t border-primary/10 bg-surface px-6 py-4 shadow-[0_-2px_8px_rgba(0,0,0,0.06)]">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="w-full rounded-2xl border-2 border-primary bg-accent px-6 py-4 font-body text-base font-bold text-surface active:scale-[0.98] transition-transform"
-        >
-          {t.p1Btn}
-        </button>
+        <AxisCarousel ratings={ratings} onRatingChange={handleRatingChange} onComplete={handleSubmit} completeLabel={t.p1Btn} />
       </div>
     </div>
   )

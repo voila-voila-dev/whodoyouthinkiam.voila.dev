@@ -31,6 +31,7 @@ type TranslationEntry = {
   talkBtn: string
   playAgainBtn: string
   newQuestionLink: string
+  nextBtn: string
   backWarning: string
   settingsTitle: string
   languageLabel: string
@@ -76,6 +77,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     talkBtn: "Talk about it 💬",
     playAgainBtn: "Play again 🔄",
     newQuestionLink: "🎲 New question",
+    nextBtn: "Next →",
     backWarning: "Player 2 hasn't finished! Go back anyway?",
     settingsTitle: "Settings",
     languageLabel: "Language",
@@ -137,7 +139,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     },
   },
   fr: {
-    appName: "Tu me vois comment ?",
+    appName: "Who Do You Think I Am?",
     tagline: "Est-ce que tu me vois comme je me vois ?",
     welcomeExplain:
       "Note-toi toi-même. Passe le téléphone. Vois si votre vision se rejoint. L'écart, c'est la conversation.",
@@ -172,6 +174,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     talkBtn: "En parler 💬",
     playAgainBtn: "Rejouer 🔄",
     newQuestionLink: "🎲 Nouvelle question",
+    nextBtn: "Suivant →",
     backWarning: "Le joueur 2 n'a pas terminé ! Revenir quand même ?",
     settingsTitle: "Paramètres",
     languageLabel: "Langue",
@@ -235,7 +238,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     },
   },
   es: {
-    appName: "¿Cómo crees que soy?",
+    appName: "Who Do You Think I Am?",
     tagline: "¿Me ves como me veo yo?",
     welcomeExplain:
       "Valórate. Pasa el teléfono. Descubre si tu pareja te ve igual. La diferencia es la conversación.",
@@ -272,6 +275,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     talkBtn: "Hablar sobre esto 💬",
     playAgainBtn: "Jugar de nuevo 🔄",
     newQuestionLink: "🎲 Nueva pregunta",
+    nextBtn: "Siguiente →",
     backWarning: "¡El jugador 2 no ha terminado! ¿Volver de todos modos?",
     settingsTitle: "Ajustes",
     languageLabel: "Idioma",
@@ -333,7 +337,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     },
   },
   de: {
-    appName: "Wie siehst du mich?",
+    appName: "Who Do You Think I Am?",
     tagline: "Siehst du mich so, wie ich mich selbst sehe?",
     welcomeExplain:
       "Bewerte dich selbst. Gib das Handy weiter. Schau ob dein Partner dasselbe sieht. Der Unterschied ist das Gespräch.",
@@ -369,6 +373,7 @@ export const translations: Record<Locale, TranslationEntry> = {
     talkBtn: "Darüber reden 💬",
     playAgainBtn: "Nochmal spielen 🔄",
     newQuestionLink: "🎲 Neue Frage",
+    nextBtn: "Weiter →",
     backWarning: "Spieler 2 ist noch nicht fertig! Trotzdem zurück?",
     settingsTitle: "Einstellungen",
     languageLabel: "Sprache",
