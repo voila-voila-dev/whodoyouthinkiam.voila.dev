@@ -30,6 +30,7 @@ type TranslationEntry = {
   matchScore: (n: number) => string
   matchComment: (n: number) => string
   exchangeBtn: string
+  finishBtn: string
   playAgainBtn: string
   settingsTitle: string
   languageLabel: string
@@ -75,6 +76,7 @@ export const translations: Record<Locale, TranslationEntry> = {
             ? "Interesting. You two have some exploring to do \uD83D\uDDFA\uFE0F"
             : "Plot twist: you\u2019re basically strangers. This is actually exciting \uD83C\uDFAD",
     exchangeBtn: "Exchange \uD83D\uDD04",
+    finishBtn: "Finish \u2014 Go Home \uD83C\uDFE0",
     playAgainBtn: "Play again \uD83D\uDD04",
     settingsTitle: "Settings",
     languageLabel: "Language",
@@ -159,6 +161,7 @@ export const translations: Record<Locale, TranslationEntry> = {
             ? "Int\u00E9ressant. Vous avez du terrain \u00E0 explorer \uD83D\uDDFA\uFE0F"
             : "Coup de th\u00E9\u00E2tre : vous \u00EAtes presque des \u00E9trangers \uD83C\uDFAD",
     exchangeBtn: "\u00C9change \uD83D\uDD04",
+    finishBtn: "Terminer \u2014 Accueil \uD83C\uDFE0",
     playAgainBtn: "Rejouer \uD83D\uDD04",
     settingsTitle: "Param\u00E8tres",
     languageLabel: "Langue",
@@ -244,6 +247,7 @@ export const translations: Record<Locale, TranslationEntry> = {
             ? "Interesante. Tienen terreno por explorar \uD83D\uDDFA\uFE0F"
             : "Giro inesperado: son casi desconocidos. \u00A1Eso es emocionante! \uD83C\uDFAD",
     exchangeBtn: "Intercambio \uD83D\uDD04",
+    finishBtn: "Terminar \u2014 Inicio \uD83C\uDFE0",
     playAgainBtn: "Jugar de nuevo \uD83D\uDD04",
     settingsTitle: "Ajustes",
     languageLabel: "Idioma",
@@ -329,6 +333,7 @@ export const translations: Record<Locale, TranslationEntry> = {
             ? "Interessant. Ihr habt noch einiges zu entdecken \uD83D\uDDFA\uFE0F"
             : "\u00DCberraschung: ihr seid fast Fremde. Das ist eigentlich aufregend \uD83C\uDFAD",
     exchangeBtn: "Tauschen \uD83D\uDD04",
+    finishBtn: "Fertig \u2014 Startseite \uD83C\uDFE0",
     playAgainBtn: "Nochmal spielen \uD83D\uDD04",
     settingsTitle: "Einstellungen",
     languageLabel: "Sprache",

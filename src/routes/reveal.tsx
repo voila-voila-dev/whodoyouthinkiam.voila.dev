@@ -103,18 +103,19 @@ function RevealScreen() {
           <button
             type="button"
             onClick={handleExchange}
-            className="flex-1 rounded-2xl border-2 border-primary bg-accent px-4 py-4 font-body text-sm font-bold text-surface active:scale-[0.98] transition-transform"
+            className="flex-1 rounded-2xl border-2 border-primary bg-primary px-4 py-4 font-body text-sm font-bold text-surface active:scale-[0.98] transition-transform"
           >
             {t.exchangeBtn}
           </button>
-        ) : null}
-        <button
-          type="button"
-          onClick={handlePlayAgain}
-          className={`rounded-2xl border-2 border-primary bg-surface px-4 py-4 font-body text-sm font-bold active:scale-[0.98] transition-transform ${round === 1 ? "flex-1" : "flex-1 bg-accent text-surface"}`}
-        >
-          {t.playAgainBtn}
-        </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handlePlayAgain}
+            className="flex-1 rounded-2xl border-2 border-primary bg-primary px-4 py-4 font-body text-sm font-bold text-surface active:scale-[0.98] transition-transform"
+          >
+            {t.finishBtn}
+          </button>
+        )}
       </div>
     </div>
   )

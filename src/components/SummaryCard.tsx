@@ -11,7 +11,7 @@ export function SummaryCard({ score }: SummaryCardProps) {
   const fontWeight = Math.round(300 + (score / 100) * 600)
 
   return (
-    <div className="mx-4 rotate-1 rounded-2xl border-2 border-primary bg-surface p-6 shadow-lg">
+    <div className="mx-4 rounded-2xl border-2 border-primary bg-surface p-6 shadow-lg">
       <p
         className="mb-2 text-center font-display text-2xl"
         style={{ fontWeight }}

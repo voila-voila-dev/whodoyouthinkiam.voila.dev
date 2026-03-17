@@ -7,7 +7,7 @@ interface AxisSliderProps {
   rightLabel: string
   value: number
   onChange: (key: string, value: number) => void
-  rotation: "odd" | "even"
+  rotation?: "odd" | "even"
 }
 
 export function AxisSlider({
@@ -17,7 +17,6 @@ export function AxisSlider({
   rightLabel,
   value,
   onChange,
-  rotation,
 }: AxisSliderProps) {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,11 +25,9 @@ export function AxisSlider({
     [axisKey, onChange],
   )
 
-  const rotationClass = rotation === "odd" ? "-rotate-1" : "rotate-1"
-
   return (
     <div
-      className={`mx-auto w-full max-w-sm rounded-2xl border-2 border-primary bg-surface p-6 shadow-md ${rotationClass}`}
+      className="mx-auto w-full max-w-sm rounded-2xl border-2 border-primary bg-surface p-6 shadow-md"
     >
       <h3 className="mb-6 text-center font-display text-2xl font-semibold">
         {label}
