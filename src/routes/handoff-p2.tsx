@@ -9,9 +9,11 @@ import {
 } from "../atoms/game"
 import { useT } from "../i18n/translations"
 
-export const Route = createFileRoute("/handoff")({ component: HandoffScreen })
+export const Route = createFileRoute("/handoff-p2")({
+  component: HandoffP2Screen,
+})
 
-function HandoffScreen() {
+function HandoffP2Screen() {
   const t = useT()
   const navigate = useNavigate()
   const round = useAtomValue(roundAtom)
@@ -20,8 +22,8 @@ function HandoffScreen() {
   const setPhase = useAtomSet(phaseAtom)
   const [countdown, setCountdown] = useState(3)
 
-  // In round 1, self-rater is P1. In round 2, self-rater is P2.
-  const selfRaterName = round === 1 ? player1Name : player2Name
+  // In round 1, observer is P2. In round 2, observer is P1.
+  const observerName = round === 1 ? player2Name : player1Name
 
   useEffect(() => {
     if (countdown <= 0) return
@@ -30,8 +32,8 @@ function HandoffScreen() {
   }, [countdown])
 
   const handleReady = useCallback(() => {
-    setPhase("self-rating")
-    navigate({ to: "/player-one" })
+    setPhase("observer-rating")
+    navigate({ to: "/player-two" })
   }, [setPhase, navigate])
 
   return (
@@ -41,11 +43,11 @@ function HandoffScreen() {
       </div>
 
       <h1 className="mb-3 text-center font-display text-[2.5rem] leading-tight font-bold text-surface">
-        {t.handoffTitle(selfRaterName)}
+        {t.handoffTitle(observerName)}
       </h1>
 
       <p className="mb-8 max-w-xs text-center font-body text-base text-surface/60">
-        {t.handoffSubtitle(selfRaterName)}
+        {t.handoffSubtitle(observerName)}
       </p>
 
       {countdown > 0 && (

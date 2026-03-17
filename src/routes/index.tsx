@@ -28,7 +28,7 @@ function WelcomeScreen() {
 
       <button
         type="button"
-        onClick={() => navigate({ to: "/player-one" })}
+        onClick={() => navigate({ to: "/setup-player-one" })}
         className="rounded-2xl border-2 border-primary bg-accent px-8 py-4 font-body text-lg font-bold text-surface shadow-md active:scale-95 transition-transform"
       >
         {t.startBtn}

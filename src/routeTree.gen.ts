@@ -9,12 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SetupPlayerTwoRouteImport } from './routes/setup-player-two'
+import { Route as SetupPlayerOneRouteImport } from './routes/setup-player-one'
 import { Route as RevealRouteImport } from './routes/reveal'
 import { Route as PlayerTwoRouteImport } from './routes/player-two'
 import { Route as PlayerOneRouteImport } from './routes/player-one'
+import { Route as HandoffP2RouteImport } from './routes/handoff-p2'
 import { Route as HandoffRouteImport } from './routes/handoff'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SetupPlayerTwoRoute = SetupPlayerTwoRouteImport.update({
+  id: '/setup-player-two',
+  path: '/setup-player-two',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupPlayerOneRoute = SetupPlayerOneRouteImport.update({
+  id: '/setup-player-one',
+  path: '/setup-player-one',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RevealRoute = RevealRouteImport.update({
   id: '/reveal',
   path: '/reveal',
@@ -28,6 +41,11 @@ const PlayerTwoRoute = PlayerTwoRouteImport.update({
 const PlayerOneRoute = PlayerOneRouteImport.update({
   id: '/player-one',
   path: '/player-one',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HandoffP2Route = HandoffP2RouteImport.update({
+  id: '/handoff-p2',
+  path: '/handoff-p2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HandoffRoute = HandoffRouteImport.update({
@@ -44,43 +62,94 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/handoff': typeof HandoffRoute
+  '/handoff-p2': typeof HandoffP2Route
   '/player-one': typeof PlayerOneRoute
   '/player-two': typeof PlayerTwoRoute
   '/reveal': typeof RevealRoute
+  '/setup-player-one': typeof SetupPlayerOneRoute
+  '/setup-player-two': typeof SetupPlayerTwoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/handoff': typeof HandoffRoute
+  '/handoff-p2': typeof HandoffP2Route
   '/player-one': typeof PlayerOneRoute
   '/player-two': typeof PlayerTwoRoute
   '/reveal': typeof RevealRoute
+  '/setup-player-one': typeof SetupPlayerOneRoute
+  '/setup-player-two': typeof SetupPlayerTwoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/handoff': typeof HandoffRoute
+  '/handoff-p2': typeof HandoffP2Route
   '/player-one': typeof PlayerOneRoute
   '/player-two': typeof PlayerTwoRoute
   '/reveal': typeof RevealRoute
+  '/setup-player-one': typeof SetupPlayerOneRoute
+  '/setup-player-two': typeof SetupPlayerTwoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/handoff' | '/player-one' | '/player-two' | '/reveal'
+  fullPaths:
+    | '/'
+    | '/handoff'
+    | '/handoff-p2'
+    | '/player-one'
+    | '/player-two'
+    | '/reveal'
+    | '/setup-player-one'
+    | '/setup-player-two'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/handoff' | '/player-one' | '/player-two' | '/reveal'
-  id: '__root__' | '/' | '/handoff' | '/player-one' | '/player-two' | '/reveal'
+  to:
+    | '/'
+    | '/handoff'
+    | '/handoff-p2'
+    | '/player-one'
+    | '/player-two'
+    | '/reveal'
+    | '/setup-player-one'
+    | '/setup-player-two'
+  id:
+    | '__root__'
+    | '/'
+    | '/handoff'
+    | '/handoff-p2'
+    | '/player-one'
+    | '/player-two'
+    | '/reveal'
+    | '/setup-player-one'
+    | '/setup-player-two'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HandoffRoute: typeof HandoffRoute
+  HandoffP2Route: typeof HandoffP2Route
   PlayerOneRoute: typeof PlayerOneRoute
   PlayerTwoRoute: typeof PlayerTwoRoute
   RevealRoute: typeof RevealRoute
+  SetupPlayerOneRoute: typeof SetupPlayerOneRoute
+  SetupPlayerTwoRoute: typeof SetupPlayerTwoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/setup-player-two': {
+      id: '/setup-player-two'
+      path: '/setup-player-two'
+      fullPath: '/setup-player-two'
+      preLoaderRoute: typeof SetupPlayerTwoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup-player-one': {
+      id: '/setup-player-one'
+      path: '/setup-player-one'
+      fullPath: '/setup-player-one'
+      preLoaderRoute: typeof SetupPlayerOneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reveal': {
       id: '/reveal'
       path: '/reveal'
@@ -100,6 +169,13 @@ declare module '@tanstack/react-router' {
       path: '/player-one'
       fullPath: '/player-one'
       preLoaderRoute: typeof PlayerOneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/handoff-p2': {
+      id: '/handoff-p2'
+      path: '/handoff-p2'
+      fullPath: '/handoff-p2'
+      preLoaderRoute: typeof HandoffP2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/handoff': {
@@ -122,9 +198,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HandoffRoute: HandoffRoute,
+  HandoffP2Route: HandoffP2Route,
   PlayerOneRoute: PlayerOneRoute,
   PlayerTwoRoute: PlayerTwoRoute,
   RevealRoute: RevealRoute,
+  SetupPlayerOneRoute: SetupPlayerOneRoute,
+  SetupPlayerTwoRoute: SetupPlayerTwoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

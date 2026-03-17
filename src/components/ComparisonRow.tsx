@@ -5,6 +5,8 @@ interface ComparisonRowProps {
   axisKey: AxisKey
   selfValue: number
   partnerValue: number
+  selfLabel: string
+  partnerLabel: string
   delay: number
 }
 
@@ -12,6 +14,8 @@ export function ComparisonRow({
   axisKey,
   selfValue,
   partnerValue,
+  selfLabel,
+  partnerLabel,
   delay,
 }: ComparisonRowProps) {
   const t = useT()
@@ -20,10 +24,10 @@ export function ComparisonRow({
 
   const gapBadge =
     gap <= 10
-      ? { emoji: "✨", bg: "bg-mint", text: "text-primary" }
+      ? { emoji: "\u2728", bg: "bg-mint", text: "text-primary" }
       : gap <= 20
-        ? { emoji: "🤔", bg: "bg-golden", text: "text-primary" }
-        : { emoji: "🚨", bg: "bg-accent", text: "text-surface" }
+        ? { emoji: "\uD83E\uDD14", bg: "bg-golden", text: "text-primary" }
+        : { emoji: "\uD83D\uDEA8", bg: "bg-accent", text: "text-surface" }
 
   const rowTint = gap > 20 ? "bg-accent/5" : ""
 
@@ -47,7 +51,9 @@ export function ComparisonRow({
 
       {/* Self bar */}
       <div className="mb-1 flex items-center gap-2">
-        <span className="w-12 text-xs font-body text-muted">{t.youLabel}</span>
+        <span className="w-16 truncate text-xs font-body text-muted">
+          {selfLabel}
+        </span>
         <div className="relative h-3 flex-1 overflow-hidden rounded-full bg-secondary">
           <div
             className="absolute inset-y-0 left-0 rounded-full bg-lavender"
@@ -66,8 +72,8 @@ export function ComparisonRow({
 
       {/* Partner bar */}
       <div className="flex items-center gap-2">
-        <span className="w-12 text-xs font-body text-muted">
-          {t.themLabel}
+        <span className="w-16 truncate text-xs font-body text-muted">
+          {partnerLabel}
         </span>
         <div className="relative h-3 flex-1 overflow-hidden rounded-full bg-secondary">
           <div

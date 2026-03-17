@@ -1,8 +1,14 @@
 import { useState, useCallback } from "react"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-
-import { useAtomSet } from "@effect-atom/atom-react"
-import { player2RatingsAtom, phaseAtom } from "../atoms/game"
+import { useAtomValue, useAtomSet } from "@effect-atom/atom-react"
+import {
+  player1NameAtom,
+  player2NameAtom,
+  player2RatingsAtom,
+  round2ObserverRatingsAtom,
+  roundAtom,
+  phaseAtom,
+} from "../atoms/game"
 import { axisKeys } from "../data/axes"
 import { LocaleMenu } from "../components/LocaleMenu"
 import { AxisCarousel } from "../components/AxisCarousel"
@@ -15,8 +21,16 @@ export const Route = createFileRoute("/player-two")({
 function PlayerTwoScreen() {
   const t = useT()
   const navigate = useNavigate()
-  const setRatings = useAtomSet(player2RatingsAtom)
+  const round = useAtomValue(roundAtom)
+  const player1Name = useAtomValue(player1NameAtom)
+  const player2Name = useAtomValue(player2NameAtom)
+  const setP2Ratings = useAtomSet(player2RatingsAtom)
+  const setR2ObserverRatings = useAtomSet(round2ObserverRatingsAtom)
   const setPhase = useAtomSet(phaseAtom)
+
+  // Round 1: P2 rates P1. Round 2: P1 rates P2.
+  const observerName = round === 1 ? player2Name : player1Name
+  const subjectName = round === 1 ? player1Name : player2Name
 
   const [ratings, setLocalRatings] = useState<Record<string, number>>(() =>
     Object.fromEntries(axisKeys.map((key) => [key, 50])),
@@ -27,10 +41,14 @@ function PlayerTwoScreen() {
   }, [])
 
   const handleSubmit = useCallback(() => {
-    setRatings(ratings)
+    if (round === 1) {
+      setP2Ratings(ratings)
+    } else {
+      setR2ObserverRatings(ratings)
+    }
     setPhase("reveal")
     navigate({ to: "/reveal" })
-  }, [ratings, setRatings, setPhase, navigate])
+  }, [ratings, round, setP2Ratings, setR2ObserverRatings, setPhase, navigate])
 
   return (
     <div className="flex min-h-dvh flex-col bg-secondary">
@@ -38,24 +56,28 @@ function PlayerTwoScreen() {
 
       {/* Header */}
       <div className="px-6 pt-6 pb-2">
-        <div className="mb-3 flex items-start justify-between">
-          <span className="rounded-full border-2 border-primary bg-surface px-3 py-1 font-body text-xs font-bold">
-            {t.step(3, 4)}
-          </span>
+        <div className="mb-3 flex items-end justify-end">
           <span className="rounded-full bg-golden px-3 py-1 font-body text-xs font-bold">
-            {t.p2Label}
+            {observerName}
           </span>
         </div>
 
         <h1 className="mb-1 font-display text-[2rem] leading-tight font-bold">
-          {t.p2Title}
+          {t.observerRateTitle(observerName, subjectName)}
         </h1>
-        <p className="font-body text-base text-muted">{t.p2Subtitle}</p>
+        <p className="font-body text-base text-muted">
+          {t.observerRateSubtitle}
+        </p>
       </div>
 
       {/* Carousel */}
       <div className="flex flex-1 items-center px-4 py-4">
-        <AxisCarousel ratings={ratings} onRatingChange={handleRatingChange} onComplete={handleSubmit} completeLabel={t.p2Btn} />
+        <AxisCarousel
+          ratings={ratings}
+          onRatingChange={handleRatingChange}
+          onComplete={handleSubmit}
+          completeLabel={t.observerRateBtn}
+        />
       </div>
     </div>
   )
