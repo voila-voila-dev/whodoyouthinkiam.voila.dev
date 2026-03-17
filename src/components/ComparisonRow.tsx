@@ -90,6 +90,12 @@ export function ComparisonRow({
           {partnerValue}
         </span>
       </div>
+
+      {/* Boundary labels */}
+      <div className="mt-1.5 flex justify-between text-[10px] font-body text-primary/50">
+        <span>{axisT.left}</span>
+        <span className="text-right">{axisT.right}</span>
+      </div>
     </div>
   )
 }
