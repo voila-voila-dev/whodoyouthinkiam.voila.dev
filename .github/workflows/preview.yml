@@ -1,4 +1,4 @@
-name: Preview on Cloudflare Pages
+name: Preview
 
 on:
   pull_request:
