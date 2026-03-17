@@ -1,11 +1,11 @@
-name: Deploy
+name: Preview
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]
 
 jobs:
-  deploy:
+  preview:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,4 +24,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=whodoyouthinkiam-voila-dev
+          command: pages deploy dist --project-name=whodoyouthinkiam-voila-dev --branch=preview
