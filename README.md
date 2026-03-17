@@ -1,8 +1,10 @@
-Welcome to your new TanStack Start app! 
+# Who Do You Think I Am? 🪞
 
-# Getting Started
+A couples perception mini-app — two people rate each other's personality on 8 axes, then reveal the gaps.
 
-To run this application:
+> **Package manager: [Bun](https://bun.sh/)** — do not use npm or pnpm.
+
+## Getting Started
 
 ```bash
 bun install
